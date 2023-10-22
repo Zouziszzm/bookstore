@@ -9,6 +9,22 @@ app.get("/", (req, res) => {
   return res.status(234).send("Check the code Please.");
 });
 
+app.post('/', async (req, res) => {
+  try {
+    if (
+      !req.body.title ||
+      !req.body.author ||
+      !req.body.description ||
+      !req.body.publishyear
+    ) {
+      res.send({ message: "Send all data please. title, author, description, publishyear," })
+    }
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message })
+  }
+});
+
 mongoose
   .connect(conStream)
   .then(() => {
